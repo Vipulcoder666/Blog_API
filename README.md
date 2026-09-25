@@ -224,3 +224,82 @@ app.get('/posts/:id', async (req, res) => {
 });
 ```
 This introduces passing a filter object to `.find()` — worth doing as a follow-up exercise.
+
+
+
+
+Installation
+bash
+git clone <your-repo-url>
+cd blog-api
+npm install
+Configuration
+
+By default, the app connects to a local MongoDB instance:
+
+javascript
+mongodb://localhost:27017/blogdb
+
+Update this in db.js if you're using a different MongoDB URI.
+
+Running the app
+bash
+node index.js
+
+The server starts on http://localhost:3000.
+
+API Routes
+Posts
+Method	Route	Description	Body
+POST	/posts	Create a new post	{ "title": "string", "content": "string" }
+GET	/posts	Get all posts	—
+Comments
+Method	Route	Description	Body
+POST	/comments	Create a comment on a post	{ "text": "string", "postId": "post's _id" }
+GET	/comments	Get all comments, with full post details populated	—
+Example usage
+
+Create a post:
+
+json
+POST /posts
+{
+  "title": "First Blog",
+  "content": "Hi, this is my first blog post"
+}
+
+Create a comment on that post:
+
+json
+POST /comments
+{
+  "text": "Great post!",
+  "postId": "<the post's _id from above>"
+}
+
+Fetch comments (with post details populated):
+
+json
+GET /comments
+
+[
+  {
+    "_id": "...",
+    "text": "Great post!",
+    "post": {
+      "_id": "...",
+      "title": "First Blog",
+      "content": "Hi, this is my first blog post"
+    }
+  }
+]
+What this project demonstrates
+Basic CRUD operations with Express and Mongoose
+Structuring a Node.js app into separate concerns (database connection, models, routes)
+Linking two MongoDB collections using references (ObjectId + ref)
+Using .populate() to fetch related documents across collections
+Status
+
+This is a learning project, currently run locally. Not yet deployed.
+
+Content
