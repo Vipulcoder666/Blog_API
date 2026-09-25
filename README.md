@@ -1,4 +1,4 @@
-# Project 3: Blog API — Full Notes (Posts + Comments)
+# Project : Blog API — Full Notes (Posts + Comments)
 
 ## What this project is
 
